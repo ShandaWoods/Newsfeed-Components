@@ -102,13 +102,84 @@ const data = [
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
-
+  
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
+ex: button open, button close
   Step 3: return the entire component.
+for each?
 
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function articleComponent(title, date, paragraph1, paragraph2, paragraph3){
+
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstParagraph = document.createElement('p');
+  const secondParagraph = document.createElement('p');
+  const thirdParagraph = document.createElement('p');
+  const buttonPanel = document.createElement('span');
+  const buttonOpen = document.createElement('button');
+  const buttonClose = document.createElement('button');
+
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstParagraph);
+  article.appendChild(secondParagraph);
+  article.appendChild(thirdParagraph);
+  article.appendChild(buttonPanel);
+  buttonPanel.appendChild(buttonOpen);
+  buttonPanel.appendChild(buttonClose);
+
+
+// const open = () =>{
+//   document.getElementsByClassName('article').classList.add('article-open');
+// }
+
+
+// document.getElementByTagName('button')[0].addEventListener('click', open);
+// document.getElementById('button').addEventListener('click', buttonClose);
+
+  article.classList.add('.article');
+  articleTitle.classList.add('h2');
+  articleDate.classList.add('.date');
+  firstParagraph.classList.add('p');
+  secondParagraph.classList.add('p');
+  thirdParagraph.classList.add('p');
+  buttonOpen.classList.add('.expandButton');
+  buttonClose.classList.add('expandButton');
+
+buttonOpen.textContent = '\U+21A1';
+buttonClose.textContent = '\U+219F';
+articleTitle.textContent = title;
+articleDate.textContent = date;
+firstParagraph.textContent = paragraph1;
+secondParagraph.textContent = paragraph2;
+thirdParagraph.textContent = paragraph3;
+
+return article
+}
+
+const createArticles = (dataArray) => {
+  return dataArray.map( (article) =>{
+  
+    return articleComponent(article.title, article.date, article.firstParagraph, article.secondParagraph, article.thirdParagraph)
+  }
+  )
+}
+
+data.push({
+  title: 'Set Phasers to FUN',
+  date: 'Stardate 12345',
+  firstParagraph: "I have reset the sensors to scan for frequencies outside the usual range. By emitting harmonic vibrations to shatter the lattices. We will monitor and adjust the frequency of the resonators. He has this ability of instantly interpreting and extrapolating any verbal communication he hears. It may be due to the envelope over the structure, causing hydrogen-carbon helix patterns throughout. I\'m comparing the molecular integrity of that bubble against our phasers.",
+  secondParagraph: "Deflector power at maximum. Energy discharge in six seconds. Warp reactor core primary coolant failure. Fluctuate phaser resonance frequencies. Resistance is futile. Recommend we adjust shield harmonics to the upper EM band when proceeding. These appear to be some kind of power-wave-guide conduits which allow them to work collectively as they perform ship functions. Increase deflector modulation to upper frequency band.",
+  thirdParagraph: "It indicates a synchronic distortion in the areas emanating triolic waves. The cerebellum, the cerebral cortex, the brain stem,  the entire nervous system has been depleted of electrochemical energy. Any device like that would produce high levels of triolic waves. These walls have undergone some kind of selective molecular polarization. I haven't determined if our phaser energy can generate a stable field. We could alter the photons with phase discriminators.",
+})
+createArticles(data).forEach( el => {
+  document.body.appendChild(el)
+})
+
